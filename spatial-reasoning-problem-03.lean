@@ -4,7 +4,6 @@
 /- (3) John is in his house.  John's house is in San Jose.  Is John in San Jose? -/
 
 constant U : Type
-universe U
 
 constants Relation BinaryPredicate Entity
 located Physical TransitiveRelation : U

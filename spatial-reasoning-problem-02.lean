@@ -4,7 +4,6 @@
 /- (2) If x is on the right of y, and z is on the left of y, then x is on the right of z -/
 
 constant U : Type
-universe U
 
 constants X Y Z : U
 constants Right Left : U
@@ -25,4 +24,4 @@ axiom a4 : ∀ X Y Z, (orientation X Y Right) ∧ (orientation Z Y Left)
     → (orientation X Z Right)
 
 theorem x_is_on_the_right_of_z: orientation X Z Right :=
-    by exact (a4 _ _ _) ⟨a1, a2⟩ 
+    by exact (a4 _ _ _) ⟨a1, a2⟩

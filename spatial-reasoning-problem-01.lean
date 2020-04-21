@@ -4,7 +4,6 @@
 /- (1) A is on the right of B. C is on the left of B. Hence, A is on the right of C -/
 
 constant U : Type
-universe U
 
 constants A B C : U
 constants Left Right : U
