@@ -1,5 +1,5 @@
 /- Spatial Reasoning Problem 01 -/
-/- It can be found at: github.com/ontologyportal/sumo/blob/master/tests/SpatialQs.txt -/
+/- It can be found at: SpatialQs.txt -/
 
 /- (1) A is on the right of B. C is on the left of B. Hence, A is on the right of C -/
 
