@@ -1,5 +1,5 @@
 /- Spatial Reasoning Problem 04 -/
-/- Found at: github.com/ontologyportal/sumo/blob/master/tests/SpatialQs.txt -/
+/- it can be found at: SpatialQs.txt -/
 
 /- (4) John is carrying a vase.  There is a flower in the vase.  Is John carrying a flower?-/
 
@@ -28,8 +28,6 @@ axiom a4 : ∃ C V F, (ins C Carrying) ∧ (objectTransferred C V)
 
 /- axioms to be added to SUMO -/
 axiom a5 : ∀ T O O2, (ins T Transfer) ∧ (objectTransferred T O)
-    ∧ (orientation O O2 Inside) → (objectTransferred T O2)
-axiom a5' : ∀ T O O2, (ins T Transfer) ∧ (objectTransferred T O)
     ∧ (orientation O2 O Inside) → (objectTransferred T O2)
 axiom a6 : ∀ T O O2, (ins T Transfer) ∧ (objectTransferred T O)
     ∧ (orientation O O2 On) → (objectTransferred T O2)
@@ -44,12 +42,18 @@ begin
     have h1, from h.left,
     have h2, from h.right.right.left,
     have h3, from h.right.right.right.left,
-    
+
     have s1, from (a3 _ _ _) ⟨a2,h1⟩,
     have s2, from h.right.left,
     have s3, from h.right.right.right.right.right,
-    have h4, from (a5' _ _ _) ⟨s1,⟨s2,s3⟩⟩,
+    have h4, from (a5 _ _ _) ⟨s1,⟨s2,s3⟩⟩,
 
-    --exists.intro C $ exists.intro F ⟨h1,⟨h2,⟨h3,h4⟩⟩⟩
-    sorry
+    have h5 : ∃ F, ins C Carrying ∧ agent C John
+        ∧ ins F Flower ∧ objectTransferred C F,
+        from exists.intro F ⟨h1,⟨h2,⟨h3,h4⟩⟩⟩,
+    have h6 : ∃ C F, ins C Carrying ∧ agent C John
+        ∧ ins F Flower ∧ objectTransferred C F,
+        from exists.intro C h5,
+
+    assumption
 end

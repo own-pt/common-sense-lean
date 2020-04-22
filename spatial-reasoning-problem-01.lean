@@ -13,7 +13,6 @@ axiom a1 : orientation A B Right
 axiom a2 : orientation C B Left
 
 /- axioms to be added to SUMO -/
-
 axiom a3 : ∀ X Y Z R, (orientation X Y R) ∧ (orientation Y Z R) → (orientation X Z R)
 axiom a4 : ∀ OBJ1 OBJ2, (orientation OBJ1 OBJ2 Right) ↔ (orientation OBJ2 OBJ1 Left)
 

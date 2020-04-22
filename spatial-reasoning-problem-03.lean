@@ -1,5 +1,5 @@
 /- Spatial Reasoning Problem 03 -/
-/- It can be found at: github.com/ontologyportal/sumo/blob/master/tests/SpatialQs.txt -/
+/- It can be found at: SpatialQs.txt -/
 
 /- (3) John is in his house.  John's house is in San Jose.  Is John in San Jose? -/
 
