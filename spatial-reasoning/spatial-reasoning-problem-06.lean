@@ -1,5 +1,5 @@
-/- Spatial Reasoning Problem 01 -/
-/- It can be found at: github.com/ontologyportal/sumo/blob/master/tests/SpatialQs.txt -/
+/- Spatial Reasoning Problem 06 -/
+/- It can be found at: SpatialQs.txt -/
 
 -- (6) A bookcase is on the floor.  A book is on the bookcase.  Is the book higher than the floor?
 
@@ -21,10 +21,10 @@ constant orientation: U → U → U → Prop
     (orientation ?B ?F On)
     (orientation ?BOOK ?B On)))
 -/
-axiom a1 : ∃ b f book : U , 
+axiom a1 : ∃ b f book : U ,
   ins book Book ∧
   ins b Furniture ∧
-  ins f Floor ∧ 
+  ins f Floor ∧
   orientation b f On ∧
   orientation book b On
 
@@ -44,7 +44,7 @@ axiom a2 : subclass TransitivePositionalAttribute PositionalAttribute
 axiom a3 : ∀ a b c p : U,
   (orientation a b p ∧
   orientation b c p ∧
-  ins p TransitivePositionalAttribute) → 
+  ins p TransitivePositionalAttribute) →
     orientation a c p
 
 /-
@@ -61,8 +61,8 @@ axiom a4 : ∀ a b c : U,
 theorem book_above_floor : ∃ (book : U) (f : U), orientation book f Above :=
 begin
   apply exists.elim a1, assume b  h1,
-  apply exists.elim h1, assume f  h2,    
-  apply exists.elim h2, assume book  h3,  
+  apply exists.elim h1, assume f  h2,
+  apply exists.elim h2, assume book  h3,
   apply exists.intro book, apply exists.intro f,
     apply a4 book b f,
       split,
