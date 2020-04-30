@@ -1,21 +1,5 @@
-/- here we add some recurrent, usefull axioms -/
+import	tiny.lean
 
-constant U : Type
-
-/- some declarations from SUMO definitions -/
-constants DirectionalAttribute PositionalAttribute
-North South East West Left Right Above Below Inside Outside: U
-
-constant ins : U → U → Prop
-constant subclass : U → U → Prop
-constant orientation : U → U → U → Prop
-constant OppositeDirection : U → U → Prop
-
-
-/- axioms from SUMO -/
-
-
-/- new definitions and axioms from spatial -/
 constant TransitivePositionalAttribute Front Behind : U
 
 -- (OppositeDirection North South)
