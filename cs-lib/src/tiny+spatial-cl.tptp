@@ -1,0 +1,1533 @@
+
+/*
+(subclass BinaryRelation Relation)
+*/
+fof(a1,axiom,s_subclass(s_BinaryRelation, s_Relation)).
+
+/*
+(subclass BinaryPredicate Predicate)
+*/
+fof(a2,axiom,s_subclass(s_BinaryPredicate, s_Predicate)).
+
+/*
+(subclass Predicate Relation)
+*/
+fof(a3,axiom,s_subclass(s_Predicate, s_Relation)).
+
+/*
+(subclass Relation Entity)
+*/
+fof(a4,axiom,s_subclass(s_Relation, s_Entity)).
+
+/*
+(subclass Physical Entity)
+*/
+fof(a5,axiom,s_subclass(s_Physical, s_Entity)).
+
+/*
+(instance SetOrClass SetOrClass)
+*/
+fof(a6,axiom,s_instance(s_SetOrClass, s_SetOrClass)).
+
+/*
+(subclass SetOrClass Entity)
+*/
+fof(a7,axiom,s_subclass(s_SetOrClass, s_Entity)).
+
+/*
+(instance SymbolicString SetOrClass)
+*/
+fof(a8,axiom,s_instance(s_SymbolicString, s_SetOrClass)).
+
+/*
+(subclass SymbolicString Entity)
+*/
+fof(a9,axiom,s_subclass(s_SymbolicString, s_Entity)).
+
+/*
+(instance Entity SetOrClass)
+*/
+fof(a10,axiom,s_instance(s_Entity, s_SetOrClass)).
+
+/*
+(subclass HumanLanguage Entity)
+*/
+fof(a11,axiom,s_subclass(s_HumanLanguage, s_Entity)).
+
+/*
+(instance EnglishLanguage SetOrClass)
+*/
+fof(a12,axiom,s_instance(s_EnglishLanguage, s_SetOrClass)).
+
+/*
+(instance HumanLanguage SetOrClass)
+*/
+fof(a13,axiom,s_instance(s_HumanLanguage, s_SetOrClass)).
+
+/*
+(subclass EnglishLanguage HumanLanguage)
+*/
+fof(a14,axiom,s_subclass(s_EnglishLanguage, s_HumanLanguage)).
+
+/*
+(subclass VariableArityRelation Relation)
+*/
+fof(a15,axiom,s_subclass(s_VariableArityRelation, s_Relation)).
+
+/*
+(subclass BinaryFunction Function)
+*/
+fof(a16,axiom,s_subclass(s_BinaryFunction, s_Function)).
+
+/*
+(subclass UnaryFunction Function)
+*/
+fof(a17,axiom,s_subclass(s_UnaryFunction, s_Function)).
+
+/*
+(subclass Function Relation)
+*/
+fof(a18,axiom,s_subclass(s_Function, s_Relation)).
+
+/*
+(subclass TernaryRelation Relation)
+*/
+fof(a19,axiom,s_subclass(s_TernaryRelation, s_Relation)).
+
+/*
+(instance Relation SetOrClass)
+*/
+fof(a20,axiom,s_instance(s_Relation, s_SetOrClass)).
+
+/*
+(subclass TransitiveRelation Relation)
+*/
+fof(a21,axiom,s_subclass(s_TransitiveRelation, s_Relation)).
+
+/*
+(forall (?B ?A ?C)
+ (=> (and (instance ?A Physical) (instance ?B Physical) (instance ?C Physical))
+  (=> (instance located TransitiveRelation)
+   (=> (and (located ?A ?B) (located ?B ?C)) (located ?A ?C)))))
+*/
+fof(a22,axiom,! [B,A,C] : (((s_instance(A, s_Physical) & s_instance(B, s_Physical) & s_instance(C, s_Physical)) => (s_instance(s_located_m, s_TransitiveRelation) => ((s_located(A, B) & s_located(B, C)) => s_located(A, C)))))).
+
+/*
+(forall (?B ?A ?C)
+ (=> (and (instance ?A Entity) (instance ?B Entity) (instance ?C Entity))
+  (=> (instance subclass TransitiveRelation)
+   (=> (and (subclass ?A ?B) (subclass ?B ?C)) (subclass ?A ?C)))))
+*/
+fof(a23,axiom,! [B,A,C] : (((s_instance(A, s_Entity) & s_instance(B, s_Entity) & s_instance(C, s_Entity)) => (s_instance(s_subclass_m, s_TransitiveRelation) => ((s_subclass(A, B) & s_subclass(B, C)) => s_subclass(A, C)))))).
+
+/*
+(instance domain TernaryRelation)
+*/
+fof(a24,axiom,s_instance(s_domain_m, s_TernaryRelation)).
+
+/*
+(instance range BinaryRelation)
+*/
+fof(a25,axiom,s_instance(s_range_m, s_BinaryRelation)).
+
+/*
+(domainSubclass rangeSubclass 2 SetOrClass)
+*/
+fof(a26,axiom,s_domainSubclass(s_rangeSubclass_m, 2, s_SetOrClass)).
+
+/*
+(instance AsymmetricRelation SetOrClass)
+*/
+fof(a27,axiom,s_instance(s_AsymmetricRelation, s_SetOrClass)).
+
+/*
+(instance rangeSubclass AsymmetricRelation)
+*/
+fof(a28,axiom,s_instance(s_rangeSubclass_m, s_AsymmetricRelation)).
+
+/*
+(instance rangeSubclass BinaryPredicate)
+*/
+fof(a29,axiom,s_instance(s_rangeSubclass_m, s_BinaryPredicate)).
+
+/*
+(forall (?C ?I ?X)
+ (=>
+  (and (instance ?I Entity) (instance ?C Entity) (subclass ?C SetOrClass)
+   (instance ?X Transitway))
+  (=>
+   (and (instance TransitFn Function)
+    (and (rangeSubclass TransitFn ?C) (instance ?I (TransitFn ?X))))
+   (instance ?I ?C))))
+*/
+fof(a30,axiom,! [C,I,X] : (((s_instance(I, s_Entity) & s_instance(C, s_Entity) & s_subclass(C, s_SetOrClass) & s_instance(X, s_Transitway)) => ((s_instance(s_TransitFn_m, s_Function) & (s_rangeSubclass(s_TransitFn_m, C) & s_instance(I, s_TransitFn(X)))) => s_instance(I, C))))).
+
+/*
+(forall (?C ?I ?X)
+ (=> (and (instance ?I Entity) (instance ?C Entity) (subclass ?C SetOrClass))
+  (=>
+   (and (instance ListFn Function)
+    (and (rangeSubclass ListFn ?C) (instance ?I (ListFn1 ?X))))
+   (instance ?I ?C))))
+*/
+fof(a31,axiom,! [C,I,X] : (((s_instance(I, s_Entity) & s_instance(C, s_Entity) & s_subclass(C, s_SetOrClass)) => ((s_instance(s_ListFn_m, s_Function) & (s_rangeSubclass(s_ListFn_m, C) & s_instance(I, s_ListFn1(X)))) => s_instance(I, C))))).
+
+/*
+(forall (?C ?I ?X)
+ (=>
+  (and (instance ?I Entity) (instance ?C Entity) (subclass ?C SetOrClass)
+   (instance ?X ReadlNumber))
+  (=>
+   (and (instance FloorFn Function)
+    (and (rangeSubclass FloorFn ?C) (instance ?I (FloorFn ?X))))
+   (instance ?I ?C))))
+*/
+fof(a32,axiom,! [C,I,X] : (((s_instance(I, s_Entity) & s_instance(C, s_Entity) & s_subclass(C, s_SetOrClass) & s_instance(X, s_ReadlNumber)) => ((s_instance(s_FloorFn_m, s_Function) & (s_rangeSubclass(s_FloorFn_m, C) & s_instance(I, s_FloorFn(X)))) => s_instance(I, C))))).
+
+/*
+(instance domainSubclass TernaryRelation)
+*/
+fof(a33,axiom,s_instance(s_domainSubclass_m, s_TernaryRelation)).
+
+/*
+(instance subclass BinaryRelation)
+*/
+fof(a34,axiom,s_instance(s_subclass_m, s_BinaryRelation)).
+
+/*
+(instance subclass TransitiveRelation)
+*/
+fof(a35,axiom,s_instance(s_subclass_m, s_TransitiveRelation)).
+
+/*
+(forall (?X ?Y)
+ (=> (and (instance ?X Entity) (instance ?Y Entity))
+  (=> (subclass ?X ?Y) (instance ?X SetOrClass))))
+*/
+fof(a36,axiom,! [X,Y] : (((s_instance(X, s_Entity) & s_instance(Y, s_Entity)) => (s_subclass(X, Y) => s_instance(X, s_SetOrClass))))).
+
+/*
+(instance instance BinaryRelation)
+*/
+fof(a37,axiom,s_instance(s_instance_m, s_BinaryRelation)).
+
+/*
+(instance documentation TernaryRelation)
+*/
+fof(a38,axiom,s_instance(s_documentation_m, s_TernaryRelation)).
+
+/*
+(instance format TernaryRelation)
+*/
+fof(a39,axiom,s_instance(s_format_m, s_TernaryRelation)).
+
+/*
+(instance termFormat TernaryRelation)
+*/
+fof(a40,axiom,s_instance(s_termFormat_m, s_TernaryRelation)).
+
+/*
+(instance Predicate SetOrClass)
+*/
+fof(a41,axiom,s_instance(s_Predicate, s_SetOrClass)).
+
+/*
+(instance partition Predicate)
+*/
+fof(a42,axiom,s_instance(s_partition_m, s_Predicate)).
+
+/*
+(instance partition VariableArityRelation)
+*/
+fof(a43,axiom,s_instance(s_partition_m, s_VariableArityRelation)).
+
+/*
+(forall (?A ?C ?B)
+ (=> (and (instance ?C Entity) (instance ?A Entity) (instance ?B Entity))
+  (=> (and (subclass ?B ?A) (subclass ?C ?B)) (subclass ?C ?A))))
+*/
+fof(a44,axiom,! [A,C,B] : (((s_instance(C, s_Entity) & s_instance(A, s_Entity) & s_instance(B, s_Entity)) => ((s_subclass(B, A) & s_subclass(C, B)) => s_subclass(C, A))))).
+
+/*
+(forall (?A ?C ?B)
+ (=> (and (instance ?B Entity) (instance ?A Entity))
+  (=> (and (subclass ?B ?A) (instance ?C ?B)) (instance ?C ?A))))
+*/
+fof(a45,axiom,! [A,C,B] : (((s_instance(B, s_Entity) & s_instance(A, s_Entity)) => ((s_subclass(B, A) & s_instance(C, B)) => s_instance(C, A))))).
+
+/*
+(subclass Human Physical)
+*/
+fof(a46,axiom,s_subclass(s_Human, s_Physical)).
+
+/*
+(instance AbrahamLincoln Human)
+*/
+fof(a47,axiom,s_instance(s_AbrahamLincoln, s_Human)).
+
+/*
+(instance located BinaryRelation)
+*/
+fof(a48,axiom,s_instance(s_located_m, s_BinaryRelation)).
+
+/*
+(instance located AntisymmetricRelation)
+*/
+fof(a49,axiom,s_instance(s_located_m, s_AntisymmetricRelation)).
+
+/*
+(instance AntisymmetricRelation SetOrClass)
+*/
+fof(a50,axiom,s_instance(s_AntisymmetricRelation, s_SetOrClass)).
+
+/*
+(subclass AntisymmetricRelation BinaryRelation)
+*/
+fof(a51,axiom,s_subclass(s_AntisymmetricRelation, s_BinaryRelation)).
+
+/*
+(forall (?INST1 ?INST2)
+ (=> (and (instance ?INST1 Physical) (instance ?INST2 Physical))
+  (=> (instance located AntisymmetricRelation)
+   (=> (and (located ?INST1 ?INST2) (located ?INST2 ?INST1))
+    (equal ?INST1 ?INST2)))))
+*/
+fof(a52,axiom,! [INST1,INST2] : (((s_instance(INST1, s_Physical) & s_instance(INST2, s_Physical)) => (s_instance(s_located_m, s_AntisymmetricRelation) => ((s_located(INST1, INST2) & s_located(INST2, INST1)) => (INST1 = INST2)))))).
+
+/*
+(instance AdditionFn BinaryFunction)
+*/
+fof(a53,axiom,s_instance(s_AdditionFn_m, s_BinaryFunction)).
+
+/*
+(instance SubtractionFn BinaryFunction)
+*/
+fof(a54,axiom,s_instance(s_SubtractionFn_m, s_BinaryFunction)).
+
+/*
+(instance MultiplicationFn BinaryFunction)
+*/
+fof(a55,axiom,s_instance(s_MultiplicationFn_m, s_BinaryFunction)).
+
+/*
+(instance DivisionFn BinaryFunction)
+*/
+fof(a56,axiom,s_instance(s_DivisionFn_m, s_BinaryFunction)).
+
+/*
+(instance FloorFn UnaryFunction)
+*/
+fof(a57,axiom,s_instance(s_FloorFn_m, s_UnaryFunction)).
+
+/*
+(instance Abstract SetOrClass)
+*/
+fof(a58,axiom,s_instance(s_Abstract, s_SetOrClass)).
+
+/*
+(subclass Quantity Abstract)
+*/
+fof(a59,axiom,s_subclass(s_Quantity, s_Abstract)).
+
+/*
+(instance Integer SetOrClass)
+*/
+fof(a60,axiom,s_instance(s_Integer, s_SetOrClass)).
+
+/*
+(instance Quantity SetOrClass)
+*/
+fof(a61,axiom,s_instance(s_Quantity, s_SetOrClass)).
+
+/*
+(subclass Integer Quantity)
+*/
+fof(a62,axiom,s_subclass(s_Integer, s_Quantity)).
+
+/*
+(instance MeasureFn BinaryFunction)
+*/
+fof(a63,axiom,s_instance(s_MeasureFn_m, s_BinaryFunction)).
+
+/*
+(instance BinaryRelation SetOrClass)
+*/
+fof(a64,axiom,s_instance(s_BinaryRelation, s_SetOrClass)).
+
+/*
+(instance parents BinaryRelation)
+*/
+fof(a65,axiom,s_instance(s_parents_m, s_BinaryRelation)).
+
+/*
+(forall (?X) (=> (instance ?X Human) (parents ?X (AdditionFn 1 1))))
+*/
+fof(a66,axiom,! [X] : ((s_instance(X, s_Human) => s_parents(X, s_AdditionFn(1, 1))))).
+
+/*
+(forall (?Y) (=> (instance ?Y Integer) (parents AbrahamLincoln ?Y)))
+*/
+fof(a67,axiom,! [Y] : ((s_instance(Y, s_Integer) => s_parents(s_AbrahamLincoln, Y)))).
+
+/*
+(instance TernaryRelation SetOrClass)
+*/
+fof(a68,axiom,s_instance(s_TernaryRelation, s_SetOrClass)).
+
+/*
+(instance minValue TernaryRelation)
+*/
+fof(a69,axiom,s_instance(s_minValue_m, s_TernaryRelation)).
+
+/*
+(instance greaterThanOrEqualTo BinaryPredicate)
+*/
+fof(a70,axiom,s_instance(s_greaterThanOrEqualTo_m, s_BinaryPredicate)).
+
+/*
+(instance lessThan BinaryPredicate)
+*/
+fof(a71,axiom,s_instance(s_lessThan_m, s_BinaryPredicate)).
+
+/*
+(instance lessThanOrEqualTo BinaryPredicate)
+*/
+fof(a72,axiom,s_instance(s_lessThanOrEqualTo_m, s_BinaryPredicate)).
+
+/*
+(instance equal BinaryPredicate)
+*/
+fof(a73,axiom,s_instance(s_equal_m, s_BinaryPredicate)).
+
+/*
+(instance greaterThan BinaryPredicate)
+*/
+fof(a74,axiom,s_instance(s_greaterThan_m, s_BinaryPredicate)).
+
+/*
+(instance BinaryFunction SetOrClass)
+*/
+fof(a75,axiom,s_instance(s_BinaryFunction, s_SetOrClass)).
+
+/*
+(instance ListOrderFn BinaryFunction)
+*/
+fof(a76,axiom,s_instance(s_ListOrderFn_m, s_BinaryFunction)).
+
+/*
+(instance Function SetOrClass)
+*/
+fof(a77,axiom,s_instance(s_Function, s_SetOrClass)).
+
+/*
+(instance ListFn Function)
+*/
+fof(a78,axiom,s_instance(s_ListFn_m, s_Function)).
+
+/*
+(instance VariableArityRelation SetOrClass)
+*/
+fof(a79,axiom,s_instance(s_VariableArityRelation, s_SetOrClass)).
+
+/*
+(instance ListFn VariableArityRelation)
+*/
+fof(a80,axiom,s_instance(s_ListFn_m, s_VariableArityRelation)).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0)
+ (=>
+  (and (instance ?ARG Integer) (instance ?VAL Quantity) (instance ?VAL Entity)
+   (instance ?N Quantity) (instance ?ARGS0 Transitway))
+  (=>
+   (and (minValue TransitFn ?ARG ?N)
+    (and (TransitFn ?ARGS0) (equal ?VAL (ListOrderFn (ListFn1 ?ARGS0) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0)
+ (=>
+  (and (instance ?ARG Integer) (instance ?VAL Quantity) (instance ?VAL Entity)
+   (instance ?N Quantity))
+  (=>
+   (and (minValue HoleHostFn ?ARG ?N)
+    (and (HoleHostFn ?ARGS0) (equal ?VAL (ListOrderFn (ListFn1 ?ARGS0) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?N Quantity) (instance ?VAL Entity)
+   (instance ?VAL Quantity) (instance ?ARG Integer) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue HoleHostFn ?ARG ?N)
+    (and (HoleHostFn ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS1 ?ARGS2)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARG Integer)
+   (instance ?VAL Quantity) (instance ?VAL Entity) (instance ?N Quantity)
+   (instance ?ARGS0 Entity) (instance ?ARGS2 Entity))
+  (=>
+   (and (minValue HoleHostFn ?ARG ?N)
+    (and (HoleHostFn ?ARGS0 ?ARGS1 ?ARGS2)
+     (equal ?VAL (ListOrderFn (ListFn3 ?ARGS0 ?ARGS1 ?ARGS2) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS3 ?ARGS2 ?ARGS1)
+ (=>
+  (and (instance ?ARGS2 Entity) (instance ?ARGS0 Entity) (instance ?N Quantity)
+   (instance ?VAL Entity) (instance ?VAL Quantity) (instance ?ARG Integer)
+   (instance ?ARGS3 Entity) (instance ?ARGS1 Entity))
+  (=>
+   (and (minValue HoleHostFn ?ARG ?N)
+    (and (HoleHostFn ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3)
+     (equal ?VAL (ListOrderFn (ListFn4 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS1)
+ (=>
+  (and (instance ?ARGS4 Entity) (instance ?ARGS2 Entity)
+   (instance ?ARG Integer) (instance ?VAL Quantity) (instance ?VAL Entity)
+   (instance ?N Quantity) (instance ?ARGS0 Entity) (instance ?ARGS3 Entity)
+   (instance ?ARGS1 Entity))
+  (=>
+   (and (minValue HoleHostFn ?ARG ?N)
+    (and (HoleHostFn ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4)
+     (equal ?VAL
+      (ListOrderFn (ListFn5 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS2 ?ARGS5 ?ARGS4 ?ARGS3 ?ARGS1)
+ (=>
+  (and (instance ?ARGS3 Entity) (instance ?ARGS5 Entity)
+   (instance ?ARGS0 Entity) (instance ?N Quantity) (instance ?VAL Entity)
+   (instance ?VAL Quantity) (instance ?ARG Integer) (instance ?ARGS2 Entity)
+   (instance ?ARGS4 Entity) (instance ?ARGS1 Entity))
+  (=>
+   (and (minValue HoleHostFn ?ARG ?N)
+    (and (HoleHostFn ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5)
+     (equal ?VAL
+      (ListOrderFn (ListFn6 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS2 ?ARGS4 ?ARGS5 ?ARGS6 ?ARGS3 ?ARGS1)
+ (=>
+  (and (instance ?ARGS3 Entity) (instance ?ARGS5 Entity)
+   (instance ?ARGS2 Entity) (instance ?ARG Integer) (instance ?VAL Quantity)
+   (instance ?VAL Entity) (instance ?N Quantity) (instance ?ARGS0 Entity)
+   (instance ?ARGS4 Entity) (instance ?ARGS6 Entity) (instance ?ARGS1 Entity))
+  (=>
+   (and (minValue HoleHostFn ?ARG ?N)
+    (and (HoleHostFn ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5 ?ARGS6)
+     (equal ?VAL
+      (ListOrderFn (ListFn7 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5 ?ARGS6)
+       ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Hole) (instance ?N Quantity)
+   (instance ?VAL Entity) (instance ?VAL Quantity) (instance ?ARG Integer)
+   (instance ?ARGS0 Region) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue holeMouth ?ARG ?N)
+    (and (holeMouth ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a81,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Entity) & s_instance(ARGS1, s_Hole) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Region) & s_instance(ARGS0, s_Entity)) => ((s_minValue(s_holeMouth_m, ARG, N) & (s_holeMouth(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Physical) (instance ?N Quantity) (instance ?VAL Entity)
+   (instance ?VAL Quantity) (instance ?ARG Integer) (instance ?ARGS0 Physical))
+  (=>
+   (and (minValue located ?ARG ?N)
+    (and (located ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a82,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Physical) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Physical)) => ((s_minValue(s_located_m, ARG, N) & (s_located(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0)
+ (=>
+  (and (instance ?ARG Integer) (instance ?VAL Quantity) (instance ?VAL Entity)
+   (instance ?N Quantity))
+  (=>
+   (and (minValue ListFn ?ARG ?N)
+    (and (ListFn1 ?ARGS0) (equal ?VAL (ListOrderFn (ListFn1 ?ARGS0) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?N Quantity) (instance ?VAL Entity)
+   (instance ?VAL Quantity) (instance ?ARG Integer) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue ListFn ?ARG ?N)
+    (and (ListFn2 ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS1 ?ARGS2)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARG Integer)
+   (instance ?VAL Quantity) (instance ?VAL Entity) (instance ?N Quantity)
+   (instance ?ARGS0 Entity) (instance ?ARGS2 Entity))
+  (=>
+   (and (minValue ListFn ?ARG ?N)
+    (and (ListFn3 ?ARGS0 ?ARGS1 ?ARGS2)
+     (equal ?VAL (ListOrderFn (ListFn3 ?ARGS0 ?ARGS1 ?ARGS2) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS3 ?ARGS2 ?ARGS1)
+ (=>
+  (and (instance ?ARGS2 Entity) (instance ?ARGS0 Entity) (instance ?N Quantity)
+   (instance ?VAL Entity) (instance ?VAL Quantity) (instance ?ARG Integer)
+   (instance ?ARGS3 Entity) (instance ?ARGS1 Entity))
+  (=>
+   (and (minValue ListFn ?ARG ?N)
+    (and (ListFn4 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3)
+     (equal ?VAL (ListOrderFn (ListFn4 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS1)
+ (=>
+  (and (instance ?ARGS4 Entity) (instance ?ARGS2 Entity)
+   (instance ?ARG Integer) (instance ?VAL Quantity) (instance ?VAL Entity)
+   (instance ?N Quantity) (instance ?ARGS0 Entity) (instance ?ARGS3 Entity)
+   (instance ?ARGS1 Entity))
+  (=>
+   (and (minValue ListFn ?ARG ?N)
+    (and (ListFn5 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4)
+     (equal ?VAL
+      (ListOrderFn (ListFn5 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS2 ?ARGS5 ?ARGS4 ?ARGS3 ?ARGS1)
+ (=>
+  (and (instance ?ARGS3 Entity) (instance ?ARGS5 Entity)
+   (instance ?ARGS0 Entity) (instance ?N Quantity) (instance ?VAL Entity)
+   (instance ?VAL Quantity) (instance ?ARG Integer) (instance ?ARGS2 Entity)
+   (instance ?ARGS4 Entity) (instance ?ARGS1 Entity))
+  (=>
+   (and (minValue ListFn ?ARG ?N)
+    (and (ListFn6 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5)
+     (equal ?VAL
+      (ListOrderFn (ListFn6 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS2 ?ARGS4 ?ARGS5 ?ARGS6 ?ARGS3 ?ARGS1)
+ (=>
+  (and (instance ?ARGS3 Entity) (instance ?ARGS5 Entity)
+   (instance ?ARGS2 Entity) (instance ?ARG Integer) (instance ?VAL Quantity)
+   (instance ?VAL Entity) (instance ?N Quantity) (instance ?ARGS0 Entity)
+   (instance ?ARGS4 Entity) (instance ?ARGS6 Entity) (instance ?ARGS1 Entity))
+  (=>
+   (and (minValue ListFn ?ARG ?N)
+    (and (ListFn7 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5 ?ARGS6)
+     (equal ?VAL
+      (ListOrderFn (ListFn7 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5 ?ARGS6)
+       ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Integer)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 List) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue ListOrderFn ?ARG ?N)
+    (and (ListOrderFn ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Quantity)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 Quantity) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue greaterThan ?ARG ?N)
+    (and (greaterThan ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a83,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Entity) & s_instance(ARGS1, s_Quantity) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Quantity) & s_instance(ARGS0, s_Entity)) => ((s_minValue(s_greaterThan_m, ARG, N) & (s_greaterThan(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?N Quantity) (instance ?VAL Entity)
+   (instance ?VAL Quantity) (instance ?ARG Integer) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue equal ?ARG ?N)
+    (and (equal ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a84,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Entity) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Entity)) => ((s_minValue(s_equal_m, ARG, N) & ((ARGS0 = ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Quantity)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 Quantity) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue lessThanOrEqualTo ?ARG ?N)
+    (and (lessThanOrEqualTo ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a85,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Entity) & s_instance(ARGS1, s_Quantity) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Quantity) & s_instance(ARGS0, s_Entity)) => ((s_minValue(s_lessThanOrEqualTo_m, ARG, N) & (s_lessThanOrEqualTo(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Quantity)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 Quantity) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue lessThan ?ARG ?N)
+    (and (lessThan ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a86,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Entity) & s_instance(ARGS1, s_Quantity) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Quantity) & s_instance(ARGS0, s_Entity)) => ((s_minValue(s_lessThan_m, ARG, N) & (s_lessThan(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Quantity)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 Quantity) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue greaterThanOrEqualTo ?ARG ?N)
+    (and (greaterThanOrEqualTo ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a87,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Entity) & s_instance(ARGS1, s_Quantity) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Quantity) & s_instance(ARGS0, s_Entity)) => ((s_minValue(s_greaterThanOrEqualTo_m, ARG, N) & (s_greaterThanOrEqualTo(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS1 ?ARGS2)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Integer)
+   (instance ?ARG Integer) (instance ?VAL Quantity) (instance ?VAL Entity)
+   (instance ?N Quantity) (instance ?ARGS0 Relation) (instance ?ARGS2 Quantity)
+   (instance ?ARGS2 Entity))
+  (=>
+   (and (minValue minValue ?ARG ?N)
+    (and (minValue ?ARGS0 ?ARGS1 ?ARGS2)
+     (equal ?VAL (ListOrderFn (ListFn3 ?ARGS0 ?ARGS1 ?ARGS2) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a88,axiom,! [N,VAL,ARG,ARGS0,ARGS1,ARGS2] : (((s_instance(ARGS1, s_Entity) & s_instance(ARGS1, s_Integer) & s_instance(ARG, s_Integer) & s_instance(VAL, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(N, s_Quantity) & s_instance(ARGS0, s_Relation) & s_instance(ARGS2, s_Quantity) & s_instance(ARGS2, s_Entity)) => ((s_minValue(s_minValue_m, ARG, N) & (s_minValue(ARGS0, ARGS1, ARGS2) & (VAL = s_ListOrderFn(s_ListFn3(ARGS0, ARGS1, ARGS2), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Integer)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 Human))
+  (=>
+   (and (minValue parents ?ARG ?N)
+    (and (parents ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a89,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Entity) & s_instance(ARGS1, s_Integer) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Human)) => ((s_minValue(s_parents_m, ARG, N) & (s_parents(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 UnitOfMeasure)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 RealNumber)
+   (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue MeasureFn ?ARG ?N)
+    (and (MeasureFn ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0)
+ (=>
+  (and (instance ?ARG Integer) (instance ?VAL Quantity) (instance ?VAL Entity)
+   (instance ?N Quantity) (instance ?ARGS0 ReadlNumber))
+  (=>
+   (and (minValue FloorFn ?ARG ?N)
+    (and (FloorFn ?ARGS0) (equal ?VAL (ListOrderFn (ListFn1 ?ARGS0) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Quantity)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 Quantity) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue DivisionFn ?ARG ?N)
+    (and (DivisionFn ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Quantity)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 Quantity) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue MultiplicationFn ?ARG ?N)
+    (and (MultiplicationFn ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Quantity)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 Quantity) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue SubtractionFn ?ARG ?N)
+    (and (SubtractionFn ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Quantity)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 Quantity) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue AdditionFn ?ARG ?N)
+    (and (AdditionFn ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+%% no translation to TPTP/FOF available.
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?N Quantity) (instance ?VAL Entity)
+   (instance ?VAL Quantity) (instance ?ARG Integer) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue partition ?ARG ?N)
+    (and (partition2 ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a90,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Entity) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Entity)) => ((s_minValue(s_partition_m, ARG, N) & (s_partition2(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS1 ?ARGS2)
+ (=>
+  (and (instance ?ARGS1 SetOrClass) (instance ?ARG Integer)
+   (instance ?VAL Quantity) (instance ?VAL Entity) (instance ?N Quantity)
+   (instance ?ARGS0 SetOrClass) (instance ?ARGS2 SetOrClass))
+  (=>
+   (and (minValue partition ?ARG ?N)
+    (and (partition3 ?ARGS0 ?ARGS1 ?ARGS2)
+     (equal ?VAL (ListOrderFn (ListFn3 ?ARGS0 ?ARGS1 ?ARGS2) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a91,axiom,! [N,VAL,ARG,ARGS0,ARGS1,ARGS2] : (((s_instance(ARGS1, s_SetOrClass) & s_instance(ARG, s_Integer) & s_instance(VAL, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(N, s_Quantity) & s_instance(ARGS0, s_SetOrClass) & s_instance(ARGS2, s_SetOrClass)) => ((s_minValue(s_partition_m, ARG, N) & (s_partition3(ARGS0, ARGS1, ARGS2) & (VAL = s_ListOrderFn(s_ListFn3(ARGS0, ARGS1, ARGS2), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS3 ?ARGS2 ?ARGS1)
+ (=>
+  (and (instance ?ARGS2 SetOrClass) (instance ?ARGS0 SetOrClass)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS3 SetOrClass)
+   (instance ?ARGS1 SetOrClass))
+  (=>
+   (and (minValue partition ?ARG ?N)
+    (and (partition4 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3)
+     (equal ?VAL (ListOrderFn (ListFn4 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a92,axiom,! [N,VAL,ARG,ARGS0,ARGS3,ARGS2,ARGS1] : (((s_instance(ARGS2, s_SetOrClass) & s_instance(ARGS0, s_SetOrClass) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS3, s_SetOrClass) & s_instance(ARGS1, s_SetOrClass)) => ((s_minValue(s_partition_m, ARG, N) & (s_partition4(ARGS0, ARGS1, ARGS2, ARGS3) & (VAL = s_ListOrderFn(s_ListFn4(ARGS0, ARGS1, ARGS2, ARGS3), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS1)
+ (=>
+  (and (instance ?ARGS4 SetOrClass) (instance ?ARGS2 SetOrClass)
+   (instance ?ARG Integer) (instance ?VAL Quantity) (instance ?VAL Entity)
+   (instance ?N Quantity) (instance ?ARGS0 SetOrClass)
+   (instance ?ARGS3 SetOrClass) (instance ?ARGS1 SetOrClass))
+  (=>
+   (and (minValue partition ?ARG ?N)
+    (and (partition5 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4)
+     (equal ?VAL
+      (ListOrderFn (ListFn5 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a93,axiom,! [N,VAL,ARG,ARGS0,ARGS2,ARGS3,ARGS4,ARGS1] : (((s_instance(ARGS4, s_SetOrClass) & s_instance(ARGS2, s_SetOrClass) & s_instance(ARG, s_Integer) & s_instance(VAL, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(N, s_Quantity) & s_instance(ARGS0, s_SetOrClass) & s_instance(ARGS3, s_SetOrClass) & s_instance(ARGS1, s_SetOrClass)) => ((s_minValue(s_partition_m, ARG, N) & (s_partition5(ARGS0, ARGS1, ARGS2, ARGS3, ARGS4) & (VAL = s_ListOrderFn(s_ListFn5(ARGS0, ARGS1, ARGS2, ARGS3, ARGS4), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS2 ?ARGS5 ?ARGS4 ?ARGS3 ?ARGS1)
+ (=>
+  (and (instance ?ARGS3 SetOrClass) (instance ?ARGS5 SetOrClass)
+   (instance ?ARGS0 SetOrClass) (instance ?N Quantity) (instance ?VAL Entity)
+   (instance ?VAL Quantity) (instance ?ARG Integer)
+   (instance ?ARGS2 SetOrClass) (instance ?ARGS4 SetOrClass)
+   (instance ?ARGS1 SetOrClass))
+  (=>
+   (and (minValue partition ?ARG ?N)
+    (and (partition6 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5)
+     (equal ?VAL
+      (ListOrderFn (ListFn6 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a94,axiom,! [N,VAL,ARG,ARGS0,ARGS2,ARGS5,ARGS4,ARGS3,ARGS1] : (((s_instance(ARGS3, s_SetOrClass) & s_instance(ARGS5, s_SetOrClass) & s_instance(ARGS0, s_SetOrClass) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS2, s_SetOrClass) & s_instance(ARGS4, s_SetOrClass) & s_instance(ARGS1, s_SetOrClass)) => ((s_minValue(s_partition_m, ARG, N) & (s_partition6(ARGS0, ARGS1, ARGS2, ARGS3, ARGS4, ARGS5) & (VAL = s_ListOrderFn(s_ListFn6(ARGS0, ARGS1, ARGS2, ARGS3, ARGS4, ARGS5), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS2 ?ARGS4 ?ARGS5 ?ARGS6 ?ARGS3 ?ARGS1)
+ (=>
+  (and (instance ?ARGS3 SetOrClass) (instance ?ARGS5 SetOrClass)
+   (instance ?ARGS2 SetOrClass) (instance ?ARG Integer)
+   (instance ?VAL Quantity) (instance ?VAL Entity) (instance ?N Quantity)
+   (instance ?ARGS0 SetOrClass) (instance ?ARGS4 SetOrClass)
+   (instance ?ARGS6 SetOrClass) (instance ?ARGS1 SetOrClass))
+  (=>
+   (and (minValue partition ?ARG ?N)
+    (and (partition7 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5 ?ARGS6)
+     (equal ?VAL
+      (ListOrderFn (ListFn7 ?ARGS0 ?ARGS1 ?ARGS2 ?ARGS3 ?ARGS4 ?ARGS5 ?ARGS6)
+       ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a95,axiom,! [N,VAL,ARG,ARGS0,ARGS2,ARGS4,ARGS5,ARGS6,ARGS3,ARGS1] : (((s_instance(ARGS3, s_SetOrClass) & s_instance(ARGS5, s_SetOrClass) & s_instance(ARGS2, s_SetOrClass) & s_instance(ARG, s_Integer) & s_instance(VAL, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(N, s_Quantity) & s_instance(ARGS0, s_SetOrClass) & s_instance(ARGS4, s_SetOrClass) & s_instance(ARGS6, s_SetOrClass) & s_instance(ARGS1, s_SetOrClass)) => ((s_minValue(s_partition_m, ARG, N) & (s_partition7(ARGS0, ARGS1, ARGS2, ARGS3, ARGS4, ARGS5, ARGS6) & (VAL = s_ListOrderFn(s_ListFn7(ARGS0, ARGS1, ARGS2, ARGS3, ARGS4, ARGS5, ARGS6), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS1 ?ARGS2)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARG Integer)
+   (instance ?VAL Quantity) (instance ?VAL Entity) (instance ?N Quantity)
+   (instance ?ARGS0 HumanLanguage) (instance ?ARGS2 SymbolicString))
+  (=>
+   (and (minValue termFormat ?ARG ?N)
+    (and (termFormat ?ARGS0 ?ARGS1 ?ARGS2)
+     (equal ?VAL (ListOrderFn (ListFn3 ?ARGS0 ?ARGS1 ?ARGS2) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a96,axiom,! [N,VAL,ARG,ARGS0,ARGS1,ARGS2] : (((s_instance(ARGS1, s_Entity) & s_instance(ARG, s_Integer) & s_instance(VAL, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(N, s_Quantity) & s_instance(ARGS0, s_HumanLanguage) & s_instance(ARGS2, s_SymbolicString)) => ((s_minValue(s_termFormat_m, ARG, N) & (s_termFormat(ARGS0, ARGS1, ARGS2) & (VAL = s_ListOrderFn(s_ListFn3(ARGS0, ARGS1, ARGS2), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS1 ?ARGS2)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARG Integer)
+   (instance ?VAL Quantity) (instance ?VAL Entity) (instance ?N Quantity)
+   (instance ?ARGS0 HumanLanguage) (instance ?ARGS2 SymbolicString))
+  (=>
+   (and (minValue format ?ARG ?N)
+    (and (format ?ARGS0 ?ARGS1 ?ARGS2)
+     (equal ?VAL (ListOrderFn (ListFn3 ?ARGS0 ?ARGS1 ?ARGS2) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a97,axiom,! [N,VAL,ARG,ARGS0,ARGS1,ARGS2] : (((s_instance(ARGS1, s_Entity) & s_instance(ARG, s_Integer) & s_instance(VAL, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(N, s_Quantity) & s_instance(ARGS0, s_HumanLanguage) & s_instance(ARGS2, s_SymbolicString)) => ((s_minValue(s_format_m, ARG, N) & (s_format(ARGS0, ARGS1, ARGS2) & (VAL = s_ListOrderFn(s_ListFn3(ARGS0, ARGS1, ARGS2), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS1 ?ARGS2)
+ (=>
+  (and (instance ?ARGS1 HumanLanguage) (instance ?ARG Integer)
+   (instance ?VAL Quantity) (instance ?VAL Entity) (instance ?N Quantity)
+   (instance ?ARGS0 Entity) (instance ?ARGS2 SymbolicString))
+  (=>
+   (and (minValue documentation ?ARG ?N)
+    (and (documentation ?ARGS0 ?ARGS1 ?ARGS2)
+     (equal ?VAL (ListOrderFn (ListFn3 ?ARGS0 ?ARGS1 ?ARGS2) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a98,axiom,! [N,VAL,ARG,ARGS0,ARGS1,ARGS2] : (((s_instance(ARGS1, s_HumanLanguage) & s_instance(ARG, s_Integer) & s_instance(VAL, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(N, s_Quantity) & s_instance(ARGS0, s_Entity) & s_instance(ARGS2, s_SymbolicString)) => ((s_minValue(s_documentation_m, ARG, N) & (s_documentation(ARGS0, ARGS1, ARGS2) & (VAL = s_ListOrderFn(s_ListFn3(ARGS0, ARGS1, ARGS2), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?VAL Quantity) (instance ?VAL Entity) (instance ?ARGS1 Entity)
+   (instance ?ARG Integer) (instance ?N Quantity))
+  (=>
+   (and (minValue instance ?ARG ?N)
+    (and (instance ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a99,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(VAL, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(ARGS1, s_Entity) & s_instance(ARG, s_Integer) & s_instance(N, s_Quantity)) => ((s_minValue(s_instance_m, ARG, N) & (s_instance(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?N Quantity) (instance ?VAL Entity)
+   (instance ?VAL Quantity) (instance ?ARG Integer) (instance ?ARGS0 Entity))
+  (=>
+   (and (minValue subclass ?ARG ?N)
+    (and (subclass ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a100,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Entity) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Entity)) => ((s_minValue(s_subclass_m, ARG, N) & (s_subclass(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS1 ?ARGS2)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Integer)
+   (instance ?ARG Integer) (instance ?VAL Quantity) (instance ?VAL Entity)
+   (instance ?N Quantity) (instance ?ARGS0 Relation)
+   (instance ?ARGS2 SetOrClass))
+  (=>
+   (and (minValue domainSubclass ?ARG ?N)
+    (and (domainSubclass ?ARGS0 ?ARGS1 ?ARGS2)
+     (equal ?VAL (ListOrderFn (ListFn3 ?ARGS0 ?ARGS1 ?ARGS2) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a101,axiom,! [N,VAL,ARG,ARGS0,ARGS1,ARGS2] : (((s_instance(ARGS1, s_Entity) & s_instance(ARGS1, s_Integer) & s_instance(ARG, s_Integer) & s_instance(VAL, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(N, s_Quantity) & s_instance(ARGS0, s_Relation) & s_instance(ARGS2, s_SetOrClass)) => ((s_minValue(s_domainSubclass_m, ARG, N) & (s_domainSubclass(ARGS0, ARGS1, ARGS2) & (VAL = s_ListOrderFn(s_ListFn3(ARGS0, ARGS1, ARGS2), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 Entity) (subclass ?ARGS1 SetOrClass)
+   (instance ?N Quantity) (instance ?VAL Entity) (instance ?VAL Quantity)
+   (instance ?ARG Integer) (instance ?ARGS0 Function))
+  (=>
+   (and (minValue rangeSubclass ?ARG ?N)
+    (and (rangeSubclass ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a102,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_Entity) & s_subclass(ARGS1, s_SetOrClass) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Function)) => ((s_minValue(s_rangeSubclass_m, ARG, N) & (s_rangeSubclass(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS1 ?ARGS0)
+ (=>
+  (and (instance ?ARGS1 SetOrClass) (instance ?N Quantity)
+   (instance ?VAL Entity) (instance ?VAL Quantity) (instance ?ARG Integer)
+   (instance ?ARGS0 Function))
+  (=>
+   (and (minValue range ?ARG ?N)
+    (and (range ?ARGS0 ?ARGS1)
+     (equal ?VAL (ListOrderFn (ListFn2 ?ARGS0 ?ARGS1) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a103,axiom,! [N,VAL,ARG,ARGS1,ARGS0] : (((s_instance(ARGS1, s_SetOrClass) & s_instance(N, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(VAL, s_Quantity) & s_instance(ARG, s_Integer) & s_instance(ARGS0, s_Function)) => ((s_minValue(s_range_m, ARG, N) & (s_range(ARGS0, ARGS1) & (VAL = s_ListOrderFn(s_ListFn2(ARGS0, ARGS1), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(forall (?N ?VAL ?ARG ?ARGS0 ?ARGS1 ?ARGS2)
+ (=>
+  (and (instance ?ARGS1 Entity) (instance ?ARGS1 Integer)
+   (instance ?ARG Integer) (instance ?VAL Quantity) (instance ?VAL Entity)
+   (instance ?N Quantity) (instance ?ARGS0 Relation)
+   (instance ?ARGS2 SetOrClass))
+  (=>
+   (and (minValue domain ?ARG ?N)
+    (and (domain ?ARGS0 ?ARGS1 ?ARGS2)
+     (equal ?VAL (ListOrderFn (ListFn3 ?ARGS0 ?ARGS1 ?ARGS2) ?ARG))))
+   (greaterThan ?VAL ?N))))
+*/
+fof(a104,axiom,! [N,VAL,ARG,ARGS0,ARGS1,ARGS2] : (((s_instance(ARGS1, s_Entity) & s_instance(ARGS1, s_Integer) & s_instance(ARG, s_Integer) & s_instance(VAL, s_Quantity) & s_instance(VAL, s_Entity) & s_instance(N, s_Quantity) & s_instance(ARGS0, s_Relation) & s_instance(ARGS2, s_SetOrClass)) => ((s_minValue(s_domain_m, ARG, N) & (s_domain(ARGS0, ARGS1, ARGS2) & (VAL = s_ListOrderFn(s_ListFn3(ARGS0, ARGS1, ARGS2), ARG)))) => s_greaterThan(VAL, N))))).
+
+/*
+(orientation A B Right)
+*/
+fof(a105,axiom,s_orientation(s_A, s_B, s_Right)).
+
+/*
+(orientation C B Left)
+*/
+fof(a106,axiom,s_orientation(s_C, s_B, s_Left)).
+
+/*
+(forall (?X ?Z ?R ?Y)
+ (=> (and (orientation ?X ?Y ?R) (orientation ?Y ?Z ?R))
+  (orientation ?X ?Z ?R)))
+*/
+fof(a107,axiom,! [X,Z,R,Y] : (((s_orientation(X, Y, R) & s_orientation(Y, Z, R)) => s_orientation(X, Z, R)))).
+
+/*
+(forall (?OBJ1 ?OBJ2)
+ (<=> (orientation ?OBJ1 ?OBJ2 Right) (orientation ?OBJ2 ?OBJ1 Left)))
+*/
+fof(a108,axiom,! [OBJ1,OBJ2] : ((s_orientation(OBJ1, OBJ2, s_Right) <=> s_orientation(OBJ2, OBJ1, s_Left)))).
+
+/*
+(orientation X Y Right)
+*/
+fof(a109,axiom,s_orientation(s_X, s_Y, s_Right)).
+
+/*
+(orientation Z Y Left)
+*/
+fof(a110,axiom,s_orientation(s_Z, s_Y, s_Left)).
+
+/*
+(forall (?Z ?X ?Y)
+ (=> (and (orientation ?X ?Y Right) (orientation ?Z ?Y Left))
+  (orientation ?X ?Z Right)))
+*/
+fof(a111,axiom,! [Z,X,Y] : (((s_orientation(X, Y, s_Right) & s_orientation(Z, Y, s_Left)) => s_orientation(X, Z, s_Right)))).
+
+/*
+(subclass City Physical)
+*/
+fof(a112,axiom,s_subclass(s_City, s_Physical)).
+
+/*
+(instance JohnsHouse Physical)
+*/
+fof(a113,axiom,s_instance(s_JohnsHouse, s_Physical)).
+
+/*
+(instance John Physical)
+*/
+fof(a114,axiom,s_instance(s_John, s_Physical)).
+
+/*
+(instance City SetOrClass)
+*/
+fof(a115,axiom,s_instance(s_City, s_SetOrClass)).
+
+/*
+(instance SanJose City)
+*/
+fof(a116,axiom,s_instance(s_SanJose, s_City)).
+
+/*
+(orientation John JohnsHouse Inside)
+*/
+fof(a117,axiom,s_orientation(s_John, s_JohnsHouse, s_Inside)).
+
+/*
+(located JohnsHouse SanJose)
+*/
+fof(a118,axiom,s_located(s_JohnsHouse, s_SanJose)).
+
+/*
+(instance TransitiveRelation SetOrClass)
+*/
+fof(a119,axiom,s_instance(s_TransitiveRelation, s_SetOrClass)).
+
+/*
+(instance located TransitiveRelation)
+*/
+fof(a120,axiom,s_instance(s_located_m, s_TransitiveRelation)).
+
+/*
+(forall (?OBJ2 ?OBJ1)
+ (=> (and (instance ?OBJ2 Physical) (instance ?OBJ1 Physical))
+  (=> (orientation ?OBJ1 ?OBJ2 Inside) (located ?OBJ1 ?OBJ2))))
+*/
+fof(a121,axiom,! [OBJ2,OBJ1] : (((s_instance(OBJ2, s_Physical) & s_instance(OBJ1, s_Physical)) => (s_orientation(OBJ1, OBJ2, s_Inside) => s_located(OBJ1, OBJ2))))).
+
+/*
+(subclass Process Physical)
+*/
+fof(a122,axiom,s_subclass(s_Process, s_Physical)).
+
+/*
+(subclass Transfer Process)
+*/
+fof(a123,axiom,s_subclass(s_Transfer, s_Process)).
+
+/*
+(instance Carrying SetOrClass)
+*/
+fof(a124,axiom,s_instance(s_Carrying, s_SetOrClass)).
+
+/*
+(instance Transfer SetOrClass)
+*/
+fof(a125,axiom,s_instance(s_Transfer, s_SetOrClass)).
+
+/*
+(subclass Carrying Transfer)
+*/
+fof(a126,axiom,s_subclass(s_Carrying, s_Transfer)).
+
+/*
+(exists (?C ?V ?F)
+ (and (instance ?C Carrying)
+  (and (objectTransferred ?C ?V)
+   (and (agent ?C John)
+    (and (instance ?F Flower)
+     (and (instance ?V Container) (orientation ?F ?V Inside)))))))
+*/
+fof(a127,axiom,? [C,V,F] : ((s_instance(C, s_Carrying) & (s_objectTransferred(C, V) & (s_agent(C, s_John) & (s_instance(F, s_Flower) & (s_instance(V, s_Container) & s_orientation(F, V, s_Inside)))))))).
+
+/*
+(forall (?O2 ?T ?O)
+ (=>
+  (and (instance ?T Transfer)
+   (and (objectTransferred ?T ?O) (orientation ?O2 ?O Inside)))
+  (objectTransferred ?T ?O2)))
+*/
+fof(a128,axiom,! [O2,T,O] : (((s_instance(T, s_Transfer) & (s_objectTransferred(T, O) & s_orientation(O2, O, s_Inside))) => s_objectTransferred(T, O2)))).
+
+/*
+(forall (?O2 ?T ?O)
+ (=>
+  (and (instance ?T Transfer)
+   (and (objectTransferred ?T ?O) (orientation ?O2 ?O On)))
+  (objectTransferred ?T ?O2)))
+*/
+fof(a129,axiom,! [O2,T,O] : (((s_instance(T, s_Transfer) & (s_objectTransferred(T, O) & s_orientation(O2, O, s_On))) => s_objectTransferred(T, O2)))).
+
+/*
+(and (instance Book1 Book)
+ (and (instance Bookshelf1 Furniture)
+  (and (instance Floor1 Floor)
+   (and (orientation Bookshelf1 Floor1 On) (orientation Book1 Bookshelf1 On)))))
+*/
+fof(a130,axiom,(s_instance(s_Book1, s_Book) & (s_instance(s_Bookshelf1, s_Furniture) & (s_instance(s_Floor1, s_Floor) & (s_orientation(s_Bookshelf1, s_Floor1, s_On) & s_orientation(s_Book1, s_Bookshelf1, s_On)))))).
+
+/*
+(instance PositionalAttribute SetOrClass)
+*/
+fof(a131,axiom,s_instance(s_PositionalAttribute, s_SetOrClass)).
+
+/*
+(subclass TransitivePositionalAttribute PositionalAttribute)
+*/
+fof(a132,axiom,s_subclass(s_TransitivePositionalAttribute, s_PositionalAttribute)).
+
+/*
+(forall (?A ?C ?P ?B)
+ (=>
+  (and (orientation ?A ?B ?P)
+   (and (orientation ?B ?C ?P) (instance ?P TransitivePositionalAttribute)))
+  (orientation ?A ?C ?P)))
+*/
+fof(a133,axiom,! [A,C,P,B] : (((s_orientation(A, B, P) & (s_orientation(B, C, P) & s_instance(P, s_TransitivePositionalAttribute))) => s_orientation(A, C, P)))).
+
+/*
+(forall (?C ?A ?B)
+ (=> (and (orientation ?A ?B On) (orientation ?B ?C On))
+  (orientation ?A ?C Above)))
+*/
+fof(a134,axiom,! [C,A,B] : (((s_orientation(A, B, s_On) & s_orientation(B, C, s_On)) => s_orientation(A, C, s_Above)))).
+
+/*
+(orientation PittsburghPennsylvania WashingtonDCUnitedStates North)
+*/
+fof(a135,axiom,s_orientation(s_PittsburghPennsylvania, s_WashingtonDCUnitedStates, s_North)).
+
+/*
+(orientation NewYorkCityUnitedStates PittsburghPennsylvania North)
+*/
+fof(a136,axiom,s_orientation(s_NewYorkCityUnitedStates, s_PittsburghPennsylvania, s_North)).
+
+/*
+(instance North TransitivePositionalAttribute)
+*/
+fof(a137,axiom,s_instance(s_North, s_TransitivePositionalAttribute)).
+
+/*
+(instance South TransitivePositionalAttribute)
+*/
+fof(a138,axiom,s_instance(s_South, s_TransitivePositionalAttribute)).
+
+/*
+(instance East TransitivePositionalAttribute)
+*/
+fof(a139,axiom,s_instance(s_East, s_TransitivePositionalAttribute)).
+
+/*
+(instance TransitivePositionalAttribute SetOrClass)
+*/
+fof(a140,axiom,s_instance(s_TransitivePositionalAttribute, s_SetOrClass)).
+
+/*
+(instance West TransitivePositionalAttribute)
+*/
+fof(a141,axiom,s_instance(s_West, s_TransitivePositionalAttribute)).
+
+/*
+(instance BinaryPredicate SetOrClass)
+*/
+fof(a142,axiom,s_instance(s_BinaryPredicate, s_SetOrClass)).
+
+/*
+(instance holeMouth BinaryPredicate)
+*/
+fof(a143,axiom,s_instance(s_holeMouth_m, s_BinaryPredicate)).
+
+/*
+(instance HoleHostFn UnaryFunction)
+*/
+fof(a144,axiom,s_instance(s_HoleHostFn_m, s_UnaryFunction)).
+
+/*
+(forall (?H ?M ?HOST)
+ (=> (and (instance ?M Region) (instance ?H Hole) (instance ?HOST Entity))
+  (=> (and (holeMouth ?M ?H) (equal ?HOST (HoleHostFn ?H)))
+   (and (meetsSpatially ?M ?HOST) (meetsSpatially ?M ?H)))))
+*/
+fof(a145,axiom,! [H,M,HOST] : (((s_instance(M, s_Region) & s_instance(H, s_Hole) & s_instance(HOST, s_Entity)) => ((s_holeMouth(M, H) & (HOST = s_HoleHostFn(H))) => (s_meetsSpatially(M, HOST) & s_meetsSpatially(M, H)))))).
+
+/*
+(forall (?O ?M ?H ?P)
+ (=> (and (instance ?H Hole) (instance ?M Region))
+  (=>
+   (and (holeMouth ?M ?H)
+    (and (contains ?H ?O) (and (part ?P ?O) (not (contains ?H ?P)))))
+   (crosses ?M ?O))))
+*/
+fof(a146,axiom,! [O,M,H,P] : (((s_instance(H, s_Hole) & s_instance(M, s_Region)) => ((s_holeMouth(M, H) & (s_contains(H, O) & (s_part(P, O) & (~ s_contains(H, P))))) => s_crosses(M, O))))).
+
+/*
+(instance TernaryPredicate SetOrClass)
+*/
+fof(a147,axiom,s_instance(s_TernaryPredicate, s_SetOrClass)).
+
+/*
+(instance tunnelMouths TernaryPredicate)
+*/
+fof(a148,axiom,s_instance(s_tunnelMouths, s_TernaryPredicate)).
+
+/*
+(forall (?M1 ?T ?M2)
+ (=>
+  (and (instance ?T Hole) (instance ?T Tunnel) (instance ?M1 Entity)
+   (instance ?M1 Region) (instance ?M2 Region) (instance ?M2 Entity))
+  (<=> (tunnelMouths ?M1 ?M2 ?T)
+   (and (holeMouth ?M1 ?T)
+    (and (holeMouth ?M2 ?T)
+     (and (not (equal ?M1 ?M2)) (not (connected ?M1 ?M2))))))))
+*/
+fof(a149,axiom,! [M1,T,M2] : (((s_instance(T, s_Hole) & s_instance(T, s_Tunnel) & s_instance(M1, s_Entity) & s_instance(M1, s_Region) & s_instance(M2, s_Region) & s_instance(M2, s_Entity)) => (s_tunnelMouths(M1, M2, T) <=> (s_holeMouth(M1, T) & (s_holeMouth(M2, T) & ((~ (M1 = M2)) & (~ s_connected(M1, M2))))))))).
+
+/*
+(forall (?M1 ?M2 ?L ?T1)
+ (=> (and (instance ?M2 Region) (instance ?M1 Region))
+  (=>
+   (and (instance ?T1 Tunnel) (and (tunnelMouths ?M1 ?M2 ?T1) (length ?T1 ?L)))
+   (distance ?M1 ?M2 ?L))))
+*/
+fof(a150,axiom,! [M1,M2,L,T1] : (((s_instance(M2, s_Region) & s_instance(M1, s_Region)) => ((s_instance(T1, s_Tunnel) & (s_tunnelMouths(M1, M2, T1) & s_length(T1, L))) => s_distance(M1, M2, L))))).
+
+/*
+(forall (?P1 ?P2 ?D ?O2 ?O1)
+ (=>
+  (and (instance ?O2 Physical) (instance ?P2 Physical) (instance ?P1 Physical)
+   (instance ?O1 Physical))
+  (=> (and (distance ?O1 ?O2 ?D) (and (located ?P1 ?O1) (located ?P2 ?O2)))
+   (distance ?P1 ?P2 ?D))))
+*/
+fof(a151,axiom,! [P1,P2,D,O2,O1] : (((s_instance(O2, s_Physical) & s_instance(P2, s_Physical) & s_instance(P1, s_Physical) & s_instance(O1, s_Physical)) => ((s_distance(O1, O2, D) & (s_located(P1, O1) & s_located(P2, O2))) => s_distance(P1, P2, D))))).
+
+/*
+(forall (?M2 ?M1 ?D) (=> (distance ?M1 ?M2 ?D) (distance ?M2 ?M1 ?D)))
+*/
+fof(a152,axiom,! [M2,M1,D] : ((s_distance(M1, M2, D) => s_distance(M2, M1, D)))).
+
+/*
+(instance UnaryFunction SetOrClass)
+*/
+fof(a153,axiom,s_instance(s_UnaryFunction, s_SetOrClass)).
+
+/*
+(instance TransitFn UnaryFunction)
+*/
+fof(a154,axiom,s_instance(s_TransitFn_m, s_UnaryFunction)).
+
+/*
+(rangeSubclass TransitFn Translocation)
+*/
+fof(a155,axiom,s_rangeSubclass(s_TransitFn_m, s_Translocation)).
+
+/*
+(instance Physical SetOrClass)
+*/
+fof(a156,axiom,s_instance(s_Physical, s_SetOrClass)).
+
+/*
+(subclass Transitway Physical)
+*/
+fof(a157,axiom,s_subclass(s_Transitway, s_Physical)).
+
+/*
+(instance Translocation SetOrClass)
+*/
+fof(a158,axiom,s_instance(s_Translocation, s_SetOrClass)).
+
+/*
+(instance Process SetOrClass)
+*/
+fof(a159,axiom,s_instance(s_Process, s_SetOrClass)).
+
+/*
+(subclass Translocation Process)
+*/
+fof(a160,axiom,s_subclass(s_Translocation, s_Process)).
+
+/*
+(instance Transitway SetOrClass)
+*/
+fof(a161,axiom,s_instance(s_Transitway, s_SetOrClass)).
+
+/*
+(subclass Tunnel Transitway)
+*/
+fof(a162,axiom,s_subclass(s_Tunnel, s_Transitway)).
+
+/*
+(instance Tunnel SetOrClass)
+*/
+fof(a163,axiom,s_instance(s_Tunnel, s_SetOrClass)).
+
+/*
+(instance Tunnel1 Tunnel)
+*/
+fof(a164,axiom,s_instance(s_Tunnel1, s_Tunnel)).
+
+/*
+(length Tunnel1 L)
+*/
+fof(a165,axiom,s_length(s_Tunnel1, s_L)).
+
+/*
+(instance Robert Human)
+*/
+fof(a166,axiom,s_instance(s_Robert, s_Human)).
+
+/*
+(instance Human SetOrClass)
+*/
+fof(a167,axiom,s_instance(s_Human, s_SetOrClass)).
+
+/*
+(instance Jane Human)
+*/
+fof(a168,axiom,s_instance(s_Jane, s_Human)).
+
+/*
+(located Jane M1)
+*/
+fof(a169,axiom,s_located(s_Jane, s_M1)).
+
+/*
+(instance M1 Region)
+*/
+fof(a170,axiom,s_instance(s_M1, s_Region)).
+
+/*
+(instance Region SetOrClass)
+*/
+fof(a171,axiom,s_instance(s_Region, s_SetOrClass)).
+
+/*
+(instance M2 Region)
+*/
+fof(a172,axiom,s_instance(s_M2, s_Region)).
+
+/*
+(holeMouth M1 Tunnel1)
+*/
+fof(a173,axiom,s_holeMouth(s_M1, s_Tunnel1)).
+
+/*
+(holeMouth M2 Tunnel1)
+*/
+fof(a174,axiom,s_holeMouth(s_M2, s_Tunnel1)).
+
+/*
+(not (equal M1 M2))
+*/
+fof(a175,axiom,(~ (s_M1 = s_M2))).
+
+/*
+(not (connected M1 M2))
+*/
+fof(a176,axiom,(~ s_connected(s_M1, s_M2))).
+
+/*
+(exists (?P)
+ (and (instance ?P Entity)
+  (and (instance ?P (TransitFn Tunnel1))
+   (and (origin ?P M1) (and (destination ?P M2) (agent ?P Robert))))))
+*/
+fof(a177,axiom,? [P] : ((s_instance(P, s_Entity) & (s_instance(P, s_TransitFn(s_Tunnel1)) & (s_origin(P, s_M1) & (s_destination(P, s_M2) & s_agent(P, s_Robert))))))).
+
+/*
+(forall (?P ?A ?T)
+ (=> (and (instance ?A Physical) (instance ?P Physical))
+  (=> (and (instance ?T Translocation) (and (agent ?T ?A) (destination ?T ?P)))
+   (located ?A ?P))))
+*/
+fof(a178,axiom,! [P,A,T] : (((s_instance(A, s_Physical) & s_instance(P, s_Physical)) => ((s_instance(T, s_Translocation) & (s_agent(T, A) & s_destination(T, P))) => s_located(A, P))))).
+
+/*
+(forall (?O ?D ?L ?T ?P)
+ (=> (instance ?P Entity)
+  (=>
+   (and (length ?T ?L)
+    (and (instance ?T Transitway)
+     (and (instance ?P (TransitFn ?T))
+      (and (origin ?P ?O) (destination ?P ?D)))))
+   (distance ?O ?D ?L))))
+*/
+fof(a179,axiom,! [O,D,L,T,P] : ((s_instance(P, s_Entity) => ((s_length(T, L) & (s_instance(T, s_Transitway) & (s_instance(P, s_TransitFn(T)) & (s_origin(P, O) & s_destination(P, D))))) => s_distance(O, D, L))))).
