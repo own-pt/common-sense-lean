@@ -1,0 +1,12 @@
+
+* The common-sense-lean
+
+How ontologies like SUMO can be represented in dependent types systems
+like Lean?
+
+* Links 
+
+- http://www.ontologyportal.org
+- http://leanprover.github.io
+- http://tptp.org/Challenges/SUMOChallenge/
+- http://tptp.org

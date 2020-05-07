@@ -1,6 +1,6 @@
 /-
 
-From the adam's serie:
+From adam's serie:
 
 https://www.youtube.com/watch?v=SkruxPmN0kk
 https://www.youtube.com/watch?v=nvHatVfiLPU
@@ -8,7 +8,6 @@ https://www.youtube.com/watch?v=nvHatVfiLPU
 -/
 
 constant U : Type
-
 
 -- sumo axioms
 
