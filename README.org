@@ -1,25 +1,25 @@
-
-# The common-sense-lean
+#+title: The common-sense-lean
 
 How ontologies like SUMO can be represented in dependent types systems
 like Lean?
 
-We develop a knowledge base, in a dependent types system called [Lean](http://leanprover.github.io), based on [SUMO](http://www.ontologyportal.org). The current aim of the project is to develop a package containing axioms and definitions, describing common sense, alongside Lean automation power, to solve common sense logical problems.
+We are developing a knowledge base in a dependent types system called [[http://leanprover.github.io][Lean]], based on [[http://www.ontologyportal.org][SUMO]]. The current aim of the project is to develop a package containing axioms and definitions, describing common sense, alongside Lean automation power, to solve common sense logical problems.
 
 It's possible to install locally the package, so that scratch files, that are not in a package, can use its dependencies. You should clone or download the project, and then, install by typing
 
-```
+#+BEGIN_SRC
 git clone https://github.com/own-pt/common-sense-lean.git
 cd common-sense-lean
 leanpkg install cs-lib
-```
-
-If you have already the repository locally, just go to the directory and type the last command. It creates a reference in `~/.lean/leanpkg.toml` for the package to be accessed from the other files.
-
-For details about Lean packages, see [Using the Package Manager](https://leanprover.github.io/reference/using_lean.html#using-the-package-manager).
+#+END_SRC
 
 
-## Links 
+If you have already the repository locally, just go to the directory and type the last command. It creates a reference in =~/.lean/leanpkg.toml= for the package to be accessed from the other files.
+
+For details about Lean packages, see [[https://leanprover.github.io/reference/using_lean.html#using-the-package-manager][Using the Package Manager]].
+
+
+** Links 
 
 - http://www.ontologyportal.org
 - http://leanprover.github.io
