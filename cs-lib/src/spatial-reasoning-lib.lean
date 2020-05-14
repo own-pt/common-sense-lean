@@ -1,12 +1,11 @@
-import	tiny.lean
+import	tiny
 
-constant TransitivePositionalAttribute Front Behind : U
+constants DirectionalAttribute North South East West Front Behind : U
 
 -- (OppositeDirection North South)
 
 -- (instance North DirectionalAttribute)
-axiom north_is_direcional_attribute :
-    ins North DirectionalAttribute
+axiom north_is_direcional_attribute : ins North DirectionalAttribute
 
 
 -- (<=>
@@ -52,9 +51,9 @@ axiom east_transitivepositionalattribute :
     ins East TransitivePositionalAttribute
 axiom west_transitivepositionalattribute :
     ins West TransitivePositionalAttribute
-axiom west_transitivepositionalattribute :
+axiom front_transitivepositionalattribute :
     ins Front TransitivePositionalAttribute
-axiom west_transitivepositionalattribute :
+axiom behind_transitivepositionalattribute :
     ins Behind TransitivePositionalAttribute
 
 -- (=>
