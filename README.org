@@ -4,7 +4,7 @@
 How ontologies like SUMO can be represented in dependent types systems
 like Lean?
 
-We develop a knowledge base, in a dependent types system called ![Lean](http://leanprover.github.io), based on ![SUMO](http://www.ontologyportal.org). The current aim of the project is to develop a package containing axioms and definitions, describing common sense, alongside Lean automation power, to solve common sense logical problems.
+We develop a knowledge base, in a dependent types system called [Lean](http://leanprover.github.io), based on [SUMO](http://www.ontologyportal.org). The current aim of the project is to develop a package containing axioms and definitions, describing common sense, alongside Lean automation power, to solve common sense logical problems.
 
 It's possible to install locally the package, so that scratch files, that are not in a package, can use its dependencies. You should clone or download the project, and then, install by typing
 
@@ -14,11 +14,12 @@ cd common-sense-lean
 leanpkg install cs-lib
 ```
 
-If you have already the repository locally, just go to the directory and type the last command. It creates a reference in ```~/.lean/leanpkg.toml``` for the package to be accessed from other files.
+If you have already the repository locally, just go to the directory and type the last command. It creates a reference in `~/.lean/leanpkg.toml` for the package to be accessed from the other files.
 
-For details about Lean packages, see ![this reference](https://leanprover.github.io/reference/using_lean.html#using-the-package-manager).
+For details about Lean packages, see [Using the Package Manager](https://leanprover.github.io/reference/using_lean.html#using-the-package-manager).
 
-### Links 
+
+## Links 
 
 - http://www.ontologyportal.org
 - http://leanprover.github.io
