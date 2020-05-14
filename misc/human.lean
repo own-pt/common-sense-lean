@@ -18,7 +18,7 @@ constant Ind : Class → Type
 
 constant Var : Class → Type
 
-variable var {c1 c2 : Class} : Inherits c1 c2 → Var c1 → (El c2)
+variable var {c1 c2 : Class} : Inherits c1 c2 → Var c1 → El c2
 variable el (c1 c2 : Class) : Inherits c1 c2 → Ind c1 → El c2
 
 /-
